@@ -5,3 +5,17 @@
 ### Data Source: https://www.consumerfinance.gov/data-research/consumer-complaints/
 
 ### Link: https://civic-complaint-triage-intelligence-engine.streamlit.app/
+
+## Technologies Used
+
+## Data Acquisition
+
+## Methodology
+
+## Data Exploration
+
+## Modeling
+
+## Results
+
+## Limitations
