@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -11,19 +12,19 @@ st.title("⚖️ Civic Complaint Triage & Intelligence Engine")
 # 2. Load Data (We use a cache so it doesn't reload every time you click)
 @st.cache_data
 def load_data():
-    # In a real app, you would load the CSV. 
-    # For this demo, let's create a sample so it runs immediately for you.
-    data = {
-        'Narrative': [
-            "My elderly mother was tricked into sending money.", 
-            "I saw a charge I didn't make.", 
-            "This company is a scam and theft.", 
-            "Late fee was charged incorrectly.", 
-            "Identity theft regarding my credit card."
-        ],
-        'State': ['NY', 'NY', 'NY', 'CA', 'NY']
-    }
-    return pd.DataFrame(data)
+        # data = {
+        # 'Narrative': [
+        #     "My elderly mother was tricked into sending money.", 
+        #     "I saw a charge I didn't make.", 
+        #     "This company is a scam and theft.", 
+        #     "Late fee was charged incorrectly.", 
+        #     "Identity theft regarding my credit card."
+        # ],
+        # 'State': ['NY', 'NY', 'NY', 'CA', 'NY']
+    data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'dashboard_data.csv')
+    df = pd.read_csv(data_path)
+    df = df.rename(columns={"Consumer complaint narrative": "Narrative"})
+    return df
 
 df = load_data()
 
@@ -39,8 +40,8 @@ def simple_risk_scorer(text):
     else:
         return "Standard"
 
-# Apply the logic
-df['Risk_Level'] = df['Narrative'].apply(simple_risk_scorer)
+# Apply the logic (use pre-computed Priority_Flag for bulk data, scorer for interactive tester)
+df['Risk_Level'] = df['Priority_Flag']
 
 # 4. The Dashboard Layout
 col1, col2 = st.columns(2)
