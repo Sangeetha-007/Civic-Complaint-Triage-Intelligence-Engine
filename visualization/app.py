@@ -2,6 +2,9 @@ import os
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import gdown
+
+GDRIVE_FILE_ID = "1Ox3lA9tnMdZbcGS_jj07Ok_sZIUTMR2_"
 
 gatherUsageStats = False
 # 1. Page Setup
@@ -21,7 +24,9 @@ def load_data():
         #     "Identity theft regarding my credit card."
         # ],
         # 'State': ['NY', 'NY', 'NY', 'CA', 'NY']
-    data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'dashboard_data.csv')
+    data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'dashboard_data.csv')
+    if not os.path.exists(data_path):
+        gdown.download(id=GDRIVE_FILE_ID, output=data_path, quiet=False)
     df = pd.read_csv(data_path)
     df = df.rename(columns={"Consumer complaint narrative": "Narrative"})
     return df
