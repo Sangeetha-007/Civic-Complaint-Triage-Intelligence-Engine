@@ -91,8 +91,8 @@ Spot-checked samples per label: identity-theft complaints correctly Critical, bi
 - **"Elderly" over-calling.** The model classifies any narrative involving an older relative (e.g., a parent's SSN being misused) as "elder abuse," even when the victim isn't elderly. Tightening the label string is one mitigation.
 - **Offline inference.** Classification happens in Colab; the Streamlit app only reads the pre-scored CSV. Re-scoring on new data requires re-running the Colab notebook and replacing the Drive-hosted file.
 - **Streamlit Cloud memory.** A 242 MB CSV expands to ~1.5 GB in pandas, near the Streamlit Cloud free-tier RAM limit. Future iterations could pre-aggregate or load only the columns the dashboard reads.
-- **NY-only scope.** The state filter is hard-coded. Extending to other jurisdictions is a one-line change, but rules and labels may need re-tuning.
-
+- **NY-only scope.** The dataset was downloaded just for NY state.
+- 
 ## Setup
 
 ### Local environment
